@@ -1,12 +1,13 @@
-CFLAGS = -std=c99 -static
+CFLAGS = -std=c99 -Wall -Wextra -Wpedantic
 
-c99:
-	$(CC) c99.c -o $@
+c99: c99.o
+
+c99.o: c99.c
 
 all: c99
 
 clean:
 	rm -f c99 *.a *.o
 
-.PHONY: test clean
+.PHONY: clean
 
