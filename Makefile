@@ -1,13 +1,13 @@
 CFLAGS = -std=c99 -Wall -Wextra -Wpedantic
 
-c99: c99.o
+scc: scc.o
 
-c99.o: c99.c
+scc.o: scc.c
 
-all: c99
+all: scc
 
 clean:
-	rm -f c99 *.a *.o
+	rm -f scc *.a *.o
 
 .PHONY: clean
 
