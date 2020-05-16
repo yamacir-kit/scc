@@ -1,12 +1,12 @@
 CFLAGS = -std=c99 -static
 
-cc:
-	$(CC) cc.c -o $@
+c99:
+	$(CC) c99.c -o $@
 
-all: cc
+all: c99
 
 clean:
-	rm -f cc *.o
+	rm -f c99 *.a *.o
 
 .PHONY: test clean
 
