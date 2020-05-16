@@ -26,10 +26,28 @@ int version(void)
 
 typedef struct
 {
+  char **data;
+  size_t size, capacity;
+} strings_t;
+
+strings_t make_strings(size_t capacity)
+{
+  strings_t object =
+  {
+    .data = (char**)(calloc(capacity, sizeof(char*))),
+    .size = 0,
+    .capacity = capacity,
+  };
+
+  return object;
+}
+
+typedef struct
+{
   int (*help)(void);
   int (*version)(void);
 
-  char **operands;
+  strings_t operands;
 } config_t;
 
 void configure(config_t *config, int argc, char **argv)
@@ -97,6 +115,7 @@ int main(int argc, char **argv)
   {
     .help = NULL,
     .version = NULL,
+    .operands = make_strings(8),
   };
 
   configure(&config, argc, argv);
@@ -111,11 +130,12 @@ int main(int argc, char **argv)
     return (config.version)();
   }
 
-  if (!config.operands)
+  if (!config.operands.size)
   {
-    // ERROR
+    config_error("no operands specified.\n");
+    return EXIT_FAILURE;
   }
 
-  return 0;
+  return EXIT_SUCCESS;
 }
 
